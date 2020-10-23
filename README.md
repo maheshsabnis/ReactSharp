@@ -90,3 +90,44 @@ Exercise 2: Create a reusable Table which will be used as DataGrid. The selected
         - will render the data in table in stored order based on the SortKey value
     - SoryKey   
         - The key on which the table will be sorted   
+===================================================================================
+1. How to perform External AJAX Calls?
+- ES 6, the Promise object, reposnsible to manage all async operations
+    - Wrapper written over all Async operations e.g. AJAX
+    - Provides a subscription model to the caller so that called will be informed about the response.
+- Using the 'fetch' object
+    - uses 'Promise' object to provide subscription
+    - get /post /put /delete
+- USe the axios object    
+    - the 'axios' package
+    - npm install --save axios
+        - exports the 'axios' object
+        - HTTP method for get/post/put/delete
+            - can receive JSON / XML / TEXT / BLOB / ArrayBuffer
+
+2. How to implement the form-validation?
+- HTML 5 DataValidation
+    - required
+    - min / max
+    - minLenth / maxLength
+    - pattern
+- Implement the validators explicitely for the application
+
+Day 2: Exercise
+1. Complete Form COmponent that is using HttpService to perform CRUD operations on REST API
+
+2. (Mandatory) --> 60 mins
+Validate the Product Form based on following rules
+    - ProductId must be unique, the field level validation
+    - Product Name must start from Upper Case Character, Field Level Validation
+    - The Category NAme and Manufacturer Name must be selected, Filed level
+    - Validations for Price
+        - Electronics, should not be less than 2000
+        - Electrical, should not be less than 50
+        - Food, should not be less than 5
+    - All entries are mandatory, modify the Product Form Component that will show
+        red star (*) indicating that the field value is mandatory  or  Red border
+    - Create a Validation Summary Component, that will show all validation messages at the bottom on the page, the validation message should be removed form summary when user enters valid data      
+
+
+https://apiapptrainingnewapp.azurewebsites.net/api/Products
