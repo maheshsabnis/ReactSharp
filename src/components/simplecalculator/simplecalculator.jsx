@@ -24,7 +24,12 @@ class SimpleCalculator extends Component {
        // based on 'name' attribute
        // setState() method will update the state property
        // by matching its name with 'name' of element
-       this.setState({[evt.target.name]:evt.target.value});     
+       this.setState({[evt.target.name]:evt.target.value}); 
+       
+       // change for num1
+       // this.setState({num1: this.target.value})
+          // change for num2
+       // this.setState({num2: this.target.value})
     }
 
 

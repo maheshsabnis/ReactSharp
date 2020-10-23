@@ -133,6 +133,7 @@ class ProductFormComponent extends Component {
                   onClick={this.clear.bind(this)}/>
                 <input type="button" value="Save" className="btn btn-success"
                 onClick={this.save.bind(this)}/>
+                
               </div>
               </form>
               <br/>

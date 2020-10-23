@@ -7,6 +7,9 @@ import SimpleComponent from './components/simplecomponent/simplecomponent';
 
 import SimpleCalculator from './components/simplecalculator/simplecalculator';
 import ProductFormComponent from './components/productformcomponent/productformcomponent';
+import LifeCycleParentComponent from './components/lifecyclehooks/lifecyclecompopnent';
+import ServiceComponent from './components/servicecomponent/servicecomponent';
+import ValidatorComponent from './components/formvalidations/validatorcomponent';
 import * as serviceWorker from './serviceWorker';
 // rdenering the Component
 // parameter 1, is the component that is to be rendered
@@ -17,7 +20,7 @@ let value = 1000;
 // the 'msg' will be used as a 'props' type
 ReactDOM.render(
   <React.StrictMode>
-      <ProductFormComponent></ProductFormComponent>
+      <ValidatorComponent></ValidatorComponent>
   </React.StrictMode>,
   document.getElementById('root')
 );
