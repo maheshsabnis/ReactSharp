@@ -116,7 +116,7 @@ Exercise 2: Create a reusable Table which will be used as DataGrid. The selected
 Day 2: Exercise
 1. Complete Form COmponent that is using HttpService to perform CRUD operations on REST API
 
-2. (Mandatory) --> 60 mins
+2. (Mandatory) --> 60 mins max
 Validate the Product Form based on following rules
     - ProductId must be unique, the field level validation
     - Product Name must start from Upper Case Character, Field Level Validation
@@ -127,7 +127,77 @@ Validate the Product Form based on following rules
         - Food, should not be less than 5
     - All entries are mandatory, modify the Product Form Component that will show
         red star (*) indicating that the field value is mandatory  or  Red border
-    - Create a Validation Summary Component, that will show all validation messages at the bottom on the page, the validation message should be removed form summary when user enters valid data      
+    - Create a Validation Summary Component, that will show all validation messages at the bottom on the page, the validation message should be removed form summary when user enters valid data  
+
+
 
 
 https://apiapptrainingnewapp.azurewebsites.net/api/Products
+========================================================================================================
+
+React.js Advanced Topics , Phase II
+
+1. Using Higher-Order-Component
+2. Error Boundreis
+    - The ErrorBoundary will not executed properly if the React project is ceated using 'create-react-app' CLI, the reason is the 'react-scripts' will override the Error Boundary and will render 'iframe' that is showing an error message.
+    - deactivate the iframe rendering by setting 
+        iframe{display:none} in app.css or the css created by you. 
+3. React Hooks with Functional Components
+    - An approach to create component using JavaScript functions, instead of class.
+        - How to define State?
+            - React Hooks, 'useState()' to define state properties
+            - mutable
+        - How to define Props?
+            - 'props' as it is, as a parameter to function component
+            - do not use 'this.props', just use 'props' 
+            - immutable
+        - How to share data across components?
+            - React Hooks, useContext()
+            - The useContext() is the React.Context object, that is used
+            to define a scope aka context of values to be send across components.
+            - React.Context, defines context using 'createContext()' method
+                - e.g. const myContext = createContext(INITIAL-VALUE)
+                - the 'Provider' object, used to provide conetxt object to a specifc component
+                    - e.g.
+                        <myContext.Provider value={DATA-TO-BE-PASSED-FROM-PARENT}>
+                          <ChildComponent/>
+                        </myContext.Provider>
+        - How to manage Lifecycle?
+            - componentDidMount() and componenrWillUnmount() is replaced by a single React Hooks, 'useEffect()'
+        - How to make Ajax calls? 
+            - use useEffect() if the call is made during the functional component mounting.
+        - How to implement SPA?
+            - Using react-router-dom
+        - How to implement validations?
+            - same as forms validation with explicit validation methods like class component
+    - What is still not supored in functional components and hence in hooks?
+        - No Error Boundry
+        - Instead use try..catch block
+4. Single Page Application (SPA) Development
+    - Route Table
+        - Record of all Navigation URLs on the client
+        - Uses a URL based query to execute the URL Expression and start navigation
+    - Router
+        - Uses teh Route Table to complete the navigation 'on-client-side'
+    - External Libraries for Routing
+        - react-router-dom
+            - Route, the define the route table
+            - Switch, contains the route table and perform query execution based on 'links' 
+            - Link, the route Expression requested by URL
+            - Redirect, to execute the lnk based redirection
+            - BrowserRouter, the component that will load and initiate Routing for React SPA
+                - Provides the rendering and lifecycle managemnet for all components. 
+
+React.js Phase III
+1. React with State Management using Redux
+2. Server-Side Rendering, next.js
+3. Routing Features
+4. React Deployment
+    - Docker Deployment (Recommended)
+    - Web Application
+5. Integration with the third party Libraries
+    - bootstrap
+    - D3    
+
+=======================================================================================================
+(Mandatory Exercise)CReate a Single Page Application for Performing CRUD operations on Products. (Use the ProductComponent created in earlier exercises. CReate Product and Edit Product has same UI). USe Class COmpponents.
