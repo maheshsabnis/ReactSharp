@@ -231,3 +231,5 @@ React.js Phase III
 
 =======================================================================================================
 (Mandatory Exercise)CReate a Single Page Application for Performing CRUD operations on Products. (Use the ProductComponent created in earlier exercises. CReate Product and Edit Product has same UI). USe Class COmpponents.
+
+(Mandatory Exercise): Complere the POST SAGA Operations using Class and Functional Components
