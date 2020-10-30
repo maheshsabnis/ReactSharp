@@ -3,55 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './../node_modules/d3/dist/d3';
-import App from './App';
-import SimpleComponent from './components/simplecomponent/simplecomponent';
 
-import SimpleCalculator from './components/simplecalculator/simplecalculator';
-import ProductFormComponent from './components/productformcomponent/productformcomponent';
-import LifeCycleParentComponent from './components/lifecyclehooks/lifecyclecompopnent';
-import ServiceComponent from './components/servicecomponent/servicecomponent';
-import ValidatorComponent from './components/formvalidations/validatorcomponent';
-import Circle from './components/d3js/circleComponent';
-import BarComponent from './components/d3js/barChartComponent';
-import HoCComponent from './components/hoc/HoCComponent';
-import CompanyComponent from './components/hoc/CompanyComponent';
-import StockComponent from './components/hoc/Stockomponent';
-import BarchartNewComponent from './components/d3js/newchart';
-import CounterContainerComponent from './components/errorboundrycomponent/MyCounterComponent';
-
-import ProductStateHookComponent from './hooks/useStateComponent';
-
-// import the BrowserRouter for routing Execution
-import {BrowserRouter} from 'react-router-dom';
+// import createStore
+import {createStore} from 'redux';
+// import Provider
+import {Provider} from 'react-redux'
+// import reducer
+import rootReducer from './reduxappfunctionalcomponents/reducers/redecurs'; 
+// import MainComponent
+import MainComponent from './reduxappfunctionalcomponents/MainComponent';
+// import the BrowserRouter for routing Execution 
 
 import * as serviceWorker from './serviceWorker';
-// rdenering the Component
-// parameter 1, is the component that is to be rendered
-// parameter 2, the DOM element on which the component
-// will be mounted for rendering
-let message = "The Message from Root of the Applciation";
-let value = 1000;
-
-const Companies = [{id:101, name: 'Microsoft', headcount: 100000},{id:102, name: 'IBM', headcount: 10000}];
-const Stocks = [
-   {id: 10001, name: 'HP', count: 1000, price:200},
-   {id: 10002, name: 'Oracle', count: 1000, price:200},
-   {id: 10003, name: 'TCS', count: 1000, price:200},
-   {id: 10004, name: 'HCL', count: 1000, price:200}
-]; 
-
-const MyCompnayComponent = HoCComponent(CompanyComponent, Companies);
-const MyStockComponent = HoCComponent(StockComponent, Stocks);
+ 
+// create a store using the reducer
+// also add a window object that will simulate the redux in browser (only in dev.)
+let store = createStore(rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
 
 
-// the 'msg' will be used as a 'props' type
+ // the Provider will create a subscription of 'store'
+ // for all components executing under it
 ReactDOM.render(
-  <React.StrictMode>
-    
-      <ProductStateHookComponent></ProductStateHookComponent>
-      
-  
-  </React.StrictMode>,
+  <Provider store={store}>
+    <MainComponent></MainComponent>
+  </Provider>
+   ,
   document.getElementById('root')
 );
 

@@ -5,6 +5,10 @@ class TableComponent extends Component {
         
     }
     render() {
+        if(this.props.dataSource.length === 0) {
+            return <div>No records</div>
+        }
+
         let columns = [];
         columns = Object.keys(this.props.dataSource[0]);     
         return (

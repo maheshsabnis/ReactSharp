@@ -1,10 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ListComponentProps from './listcomponentprops';
-import TableComponentContext from './tableComponentContext';
+import TableComponentContextNew from './tableComponentContextNew';
 // import the DataContext so that the current component will pass data to it
 import {DataContext} from './dataContext';
+import {HttpService} from './../services/httpservice';
 // functional component
 const ProductStateHookComponent=()=>{
+
+    const serv = new HttpService();
+
+
     // state declaration using 'useState' hooks
     // destructuring, defining the object propries
     // and initializing it by object
@@ -16,24 +21,44 @@ const ProductStateHookComponent=()=>{
     //    [initState, callback to update state] = useState(InitialState)
     const [product, updateProduct] = useState({
         ProductId:0, ProductName:'', CategoryName:'',
-        Manufacturer:''
+        Manufacturer:'', Description:'', BasePrice:0
     });
     const [products, addProduct]=useState([]);
     const categories =["ECT","ECL","CVL","MEC"];
     const manufacturers = ["MS-ECT", "LS_ECL", "TS-CVL", "RS-MEC"];
     const clear=()=>{
         updateProduct({
-            ProductId:0, ProductName:'', CategoryName:''
+            ProductId:0, ProductName:'', CategoryName:'',
+            Description:'', BasePrice:0
         });
     }
+
+    // make a call to HttpServce
+
+    useEffect(()=>{
+      serv.getData().then((response)=>{
+         addProduct(response.data);
+      }).catch((error)=>{
+        console.log(`Error Occured ${error}`);
+      });
+    },[]);
+    
 
     const save=()=>{
         // use an object mutation to update same products array (state property)
         // using the updated product
-        addProduct([...products, {ProductId:product.ProductId, 
-             ProductName:product.ProductName,
-             CategoryName:product.CategoryName,
-            Manufacturer: product.Manufacturer}]);
+        // addProduct([...products, {ProductId:product.ProductId, 
+        //      ProductName:product.ProductName,
+        //      CategoryName:product.CategoryName,
+        //     Manufacturer: product.Manufacturer,
+        //   Description:product.Description,
+        // BasePrice: product.BasePrice}]);
+
+        serv.postData(product).then((response)=>{
+          addProduct([...products, response.data]);
+       }).catch((error)=>{
+         console.log(`Error Occured ${error}`);
+       });
     }
 
 
@@ -88,17 +113,40 @@ const ProductStateHookComponent=()=>{
           dataSource={manufacturers}
           emitSelectedData={(data)=>updateProduct({...product, Manufacturer:data})}></ListComponentProps>
          </div>
+        
          <div className="form-group">
-            <input type="button" value="Clear" className="btn btn-warning"
-            onClick={clear} />
-            <input type="button" value="Save" className="btn btn-success"
-            onClick={save} />
-         </div>
-         <div className="container">
+            <label>Description</label>
+            <input type="text"  
+            name="Description"
+            value={product.Description}
+            className="form-control"  
+            onChange={(evt)=>updateProduct({...product, Description:evt.target.value})}/>
+          </div>
+          <div className="form-group">
+            <label>Base Price</label>
+            <input type="text"  
+            name="BasePrice"
+            value={product.BasePrice}
+            className="form-control"  
+            onChange={(evt)=>updateProduct({...product, BasePrice:parseInt(evt.target.value)})}/>
+          </div>
+          <div className="form-group">
+          <input type="button" value="Clear" className="btn btn-warning"
+          onClick={clear} />
+          <input type="button" value="Save" className="btn btn-success"
+          onClick={save} />
+       </div>
+        {/* <div className="container">
            <DataContext.Provider value={products}>
                 <TableComponentContext/>
             </DataContext.Provider>
-         </div>
+  </div>*/}
+        
+         <div className="container">
+         <DataContext.Provider value={{products,updateProduct}}>
+              <TableComponentContextNew/>
+          </DataContext.Provider>
+       </div>
         </div>
     );
 }

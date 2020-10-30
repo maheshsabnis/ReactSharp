@@ -1,15 +1,20 @@
 import React, {useContext} from 'react';
 import {DataContext} from './dataContext'
-const TableComponentContext=()=>{
+const TableComponentContextNew=()=>{
     // subscribe to the DataContext using useContext object
     // read the data from the DataContext
     const dataContext = useContext(DataContext);
-    if(dataContext.length ===0) {
+
+    // read the products data using the indexer of the values from provider 
+    const dataSource =  dataContext[Object.keys(dataContext)[0]]; // products array
+    const event = dataContext[Object.keys(dataContext)[1]]; // read the method
+
+    if(dataSource.length ===0) {
       return <div>No Records</div>
     }
     else {
     let columns = [];
-    columns = Object.keys(dataContext[0]);
+    columns = Object.keys(dataSource[0]);
     return(
         <div className="container">
           <strong>Data in Table</strong>
@@ -28,8 +33,8 @@ const TableComponentContext=()=>{
                    </thead>
                    <tbody>
                       {
-                         dataContext.map((d,i)=>(
-                              <tr key={i}>
+                        dataSource.map((d,i)=>(
+                              <tr key={i} onClick={()=>event(d)}>
                                  {
                                   columns.map((c,idx)=> (
                                       <td key={idx}>{d[c]}</td>
@@ -48,4 +53,4 @@ const TableComponentContext=()=>{
   }
 }
 
-export default TableComponentContext;
+export default TableComponentContextNew;
