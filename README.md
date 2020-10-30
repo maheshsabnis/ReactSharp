@@ -163,13 +163,17 @@ React.js Advanced Topics , Phase II
                           <ChildComponent/>
                         </myContext.Provider>
         - How to manage Lifecycle?
-            - componentDidMount() and componenrWillUnmount() is replaced by a single React Hooks, 'useEffect()'
+            - componentDidMount() and componentWillUnmount() is replaced by a single React Hooks, 'useEffect()'
+                - Always acessed as 'functional component' level as like other Hooks.
+                - useEffect is executed for each change in state.
+                - useEffect accepts a 'depednency array' this will be a condition for useEffect to perform operation 'only once' irrespective of the state changes.
         - How to make Ajax calls? 
             - use useEffect() if the call is made during the functional component mounting.
         - How to implement SPA?
             - Using react-router-dom
         - How to implement validations?
             - same as forms validation with explicit validation methods like class component
+        - If data is shared across all children in DOM then use 'props' else for shaing data to a spceific child component then use 'context' using useContext() hooks.    
     - What is still not supored in functional components and hence in hooks?
         - No Error Boundry
         - Instead use try..catch block
@@ -190,6 +194,32 @@ React.js Advanced Topics , Phase II
 
 React.js Phase III
 1. React with State Management using Redux
+    - Action Creators and Action Methods
+        - The method that accepts the payload (input parameter) from component and return following
+            - type: Output action (mandatory)
+            - payload: the output parameter (optional) 
+    - Reducer functions
+        - pure function that accepts state as input and returns state as output 
+    - Store Creation
+        - Store is created using 'createStore()' method taht accepts 'reducer' object
+    - Class Components
+        - Share data across the components using
+            - using mapStateToProps() function, the state (data) from store  will be provided to class coponents using props.
+            - using mapDispatchToProps() function, the event raised on component will be dispateched to action methods so that the reducer function will update the store and updated data will be made availabe to components using props.
+    - functional components using Hooks
+        - useSelector(), used instead of mapStateToProps()      
+            - used to read state from store and provide it to the functional component.
+        - useDispatch(), used instead of   mapDispatchToProps()
+            - once event is raised on UI, the action will be dispatched  
+    - Packages
+        - npm install --save redux react-redux
+            - redux , the REDUX object model
+                - The 'createStore()' method to create store
+                - combineReducres(), method to manage all reducers in a single instance
+            - react-redux
+                - The 'Providrs', the component that will be sued to manage lifecycle of React-Redux application by managing the 'store' subscription for all components
+                - The 'useSelector()' and 'useDispatch()' hooks to read data from store and dispatching actions respectively.
+                - The connect() method to map component wilth store (used only in case of class components, replaced by useSelector and useDispatch for functional components)                 
 2. Server-Side Rendering, next.js
 3. Routing Features
 4. React Deployment
