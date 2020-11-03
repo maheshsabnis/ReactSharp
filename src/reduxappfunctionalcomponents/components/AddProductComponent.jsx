@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-
+import React, { useState,useEffect } from 'react';
+import {useSelector} from 'react-redux';
 const AddProductComponent=(props)=>{
+  
   const [product, updateProduct]=useState({ProductId:0,ProductName:''});
   const handleClick=()=>{
       // when the button is clicked the
@@ -8,6 +9,17 @@ const AddProductComponent=(props)=>{
       // the AddClick() props which is used by MainComponent
      props.AddClick(product);
   }  
+   const prd = useSelector(state=>state.selectProductReducer);
+   console.log(prd);
+   
+  const clear=()=>{
+   updateProduct({ProductId:0,ProductName:''});
+  }
+  useEffect(() => {
+   if(prd.product !== undefined) {
+      updateProduct(prd.product.product);
+   }
+  });
   return (
       <div>
          <div>
@@ -25,6 +37,7 @@ const AddProductComponent=(props)=>{
          <div>
            <input type="button" value="Add"
             onClick={handleClick}/>
+            <input type="button" value="Clear" onClick={clear}/>
          </div>
       </div>
   );

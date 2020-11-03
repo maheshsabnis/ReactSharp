@@ -1,7 +1,10 @@
 import React from 'react';
-import  TableComponent from './../../components/reusablecoponents/TableComponent';
 const ListProductsComponent=(props)=>{
+   const handleRowClick=(p)=>{
    
+     
+      props.RowClick(p);
+   }
     return(
          <div>
              <div>
@@ -17,7 +20,8 @@ const ListProductsComponent=(props)=>{
                <tbody>
                   {
                       props.listProducts.map((p,i)=>(
-                           <tr key={i}>
+                         
+                           <tr key={i} onClick={()=>handleRowClick(p)}> 
                              <td>{p.product.ProductId}</td>
                              <td>{p.product.ProductName}</td>
                            </tr> 
