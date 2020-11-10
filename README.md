@@ -221,13 +221,83 @@ React.js Phase III
                 - The 'useSelector()' and 'useDispatch()' hooks to read data from store and dispatching actions respectively.
                 - The connect() method to map component wilth store (used only in case of class components, replaced by useSelector and useDispatch for functional components)                 
 2. Server-Side Rendering, next.js
-3. Routing Features
+- JavaScript build on server, packaged on server,
+    DOM generation takes place on client
+- Front-end programming facts
+    - Comlexity in Components
+        - Mutable and Immutable object (JS Level)
+            - [...object, newvalue]
+                - adding new 'newvalue' in object
+                - 1 initial vaue of newvalue
+                    - object[1]
+                - 1 is changed to 2
+                    - object[1,2]    
+        - Complex DOM
+            - Third-Party depdnencies
+            - Other JS technology components*    
+        - Server-Side Rednring
+    - ES 6 +, ES 7, ES8, ES-next
+        - Hight-Level-JavaScript aka ES 6 aka Modern JavaScript
+            - Babel
+            - Babel-Preset
+                - Bridge between ES 6 + transpiled JavaScript and Browser Suuported JS
+        - TypeScript
+            - TSC or TypeScript Transpier
+                - Polyfills
+        - Dart                
+    - Navigation Requirements
+        - May result into memory leaks
+    - Use Server-Side build and rendering Engine or Framework for front-end apps
+        - Next.js
+            - React Framework for Production
+            - Best developer experience for all production features for React app for providing Hybrid Sattic and server-side rednering
+                - Advantages
+                    - Pre-rendering
+                    - Pre-fetch Routing
+                    - No Configuration    
+                - Concept of 'page'
+                    - The default container folder for all route components, has 'page/index.js'
+                        - The defaule Home for the Application
+            - FIrst create a build of the project and then run the application   
+            - Static Generaion (Recommended): The HTML is generated at build time, this is reused on each request 
+            - Server-Side Rendering, HTML is generated for each request                    
+
+3. Testing Features of the React.js apps
+    - Enzyme
 4. React Deployment
     - Docker Deployment (Recommended)
-    - Web Application
+        - Create a docker image of the application
+        - Push the docker image on Repository
+            - docker hub
+        - CReate S3 Instance 
+        - Pull image from docker hub to S3 instance
+        - Runt the image
+            - docker run <IMAGE-NAME> -p 5600:80     
+    - Web Application    
+        - Integrated the React app with server-side technology
+            - ASP.NET, MVC, ASP.NET Core
+            - Java Spring Boot
+        - Deploy the React App as WEB Application 
+            - Recommended for independent React App
+            - High Availability
+            - Low maintenance
+            - Decide the Cloud Provider
+                - CI Pipeline
+                    - GitHub, BLOB, BitBucket, etc.
+                - THe Server with dependecy Management
+                    - AWS Ampliyfy
+                - Static Web Sites / Dynamic Web Sites (API Apps / Dedicated web site) 
 5. Integration with the third party Libraries
+    - The 'react-scripts', Internally uses node.js 'fs' module to read exported types and import it in the React.js apps 
     - bootstrap
-    - D3    
+    - D3 
+        - SVG
+            - scalable vector graphics
+            - Browsers' media services
+            - Vector based rednering for DOM elemnts under the HTML 5 support of JS-DOM
+                - A ViewBox to Render HTML based on matrix transformation
+        - npm install --save d3
+        - import * as d3 from 'd3'   
 
 =======================================================================================================
 (Mandatory Exercise)CReate a Single Page Application for Performing CRUD operations on Products. (Use the ProductComponent created in earlier exercises. CReate Product and Edit Product has same UI). USe Class COmpponents.
