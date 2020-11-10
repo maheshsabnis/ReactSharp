@@ -27,7 +27,13 @@ function getProductsData(){
 }
 
 function postProductsData(data){
+    alert(`Datab in Post of Saga ${JSON.stringify(data)}`);
     // code to post product
+    let serv = new HttpService();
+    const response = serv.postData(data).then((result)=>result.data);
+    // resolve the promise object, so that the generator funciton of saga
+    // will be able to read data from it
+    return Promise.resolve(response);
 }
 
 // generator function 1, that will subscribe to the promise object and read data
@@ -51,13 +57,13 @@ function* actionWatcherForInputActionGenerator(){
     yield takeLatest('GET_PRODUCTS', fetchProductsGenerator); 
 }
 
-
-
 function* saveProductsGenerator(){
+    alert(`Save {Product Generator Caslled  1}`);
     // read an input parameter for the action
     const parameters = yield take('SAVE_PRODUCT');
-    const response = yield call(getProductsData, parameters.product);
-
+    alert(`Datab in saveProductsGenerator Saga ${JSON.stringify(parameters.product)}`);
+    const response = yield call(postProductsData, parameters.product);
+    alert(`In Success of saveProductsGenerator ${JSON.stringify(response)} `)
     // put the response with the output action and data (aka payload) of the action
     yield put({
         type: 'SAVE_PRODUCT_SUCCESS',
@@ -66,6 +72,7 @@ function* saveProductsGenerator(){
 }
 
 function* actionWatcherForInputActionGeneratorSaveProduct(){
+    alert(`Save {Product Generator Caslled  2}`);
     // using takeLatest operator , subscribe to the input action
     // and map the input action with Generator Function
     yield takeLatest('SAVE_PRODUCT', saveProductsGenerator); 

@@ -2,50 +2,61 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './../node_modules/d3/dist/d3';
+import 'd3/dist/d3';
+import App from './App';
+import SimpleComponent from './components/simplecomponent/simplecomponent';
 
-// import createStore, applyMiddleware, compose
-// applyMiddleware: Used to register SAGA middleware for store,
-// applyMiddleware will manage all async calls
-// compose: Used to register the Redux Simulator with application
-import {createStore, applyMiddleware, compose} from 'redux';
-// import Provider
-import {Provider} from 'react-redux'
-// import reducer
-import reducer from './sagaapps/reducers/reducers';
+import SimpleCalculator from './components/simplecalculator/simplecalculator';
+import ProductFormComponent from './components/productformcomponent/productformcomponent';
+import LifeCycleParentComponent from './components/lifecyclehooks/lifecyclecompopnent';
+import ServiceComponent from './components/servicecomponent/servicecomponent';
+import ValidatorComponent from './components/formvalidations/validatorcomponent';
+import Circle from './components/d3js/circleComponent';
+import BarComponent from './components/d3js/barChartComponent';
+import HoCComponent from './components/hoc/HoCComponent';
+import CompanyComponent from './components/hoc/CompanyComponent';
+import StockComponent from './components/hoc/Stockomponent';
+import BarchartNewComponent from './components/d3js/newchart';
+import CounterContainerComponent from './components/errorboundrycomponent/MyCounterComponent';
+import MouseMoveToggelingComponent from './hooks/mouseMoveToggelingComponent';
+import ProductStateHookComponent from './hooks/useStateComponent';
+import MainComponent from './reduxappfunctionalcomponents/MainComponent';
+import GraphComponent from './components/d3js/GraphComponent';
+import ColumnChart from './components/d3js/columnchart';
+// import the BrowserRouter for routing Execution
+import {BrowserRouter} from 'react-router-dom';
+import OrderedList from './components/componentfortest/OrderList';
 
-// import the createSagaMiddleware to confugure SAGA middleware
-// with the applciation
-import createSagaMiddleware from 'redux-saga'; 
+import StaticBarChartComponent from './components/simplechartsapp/StaticBarChartComponent';
 
-// import MainComponent
-import MainSagaComonent from './sagaapps/MainSagaComponent';
 import * as serviceWorker from './serviceWorker';
-import rootSaga from './sagaapps/sagas';
-// create an instance of Saga Middleware
-const appSagaMiddleware = createSagaMiddleware();
+// rdenering the Component
+// parameter 1, is the component that is to be rendered
+// parameter 2, the DOM element on which the component
+// will be mounted for rendering
+let message = "The Message from Root of the Applciation";
+let value = 1000;
+
+const Companies = [{id:101, name: 'Microsoft', headcount: 100000},{id:102, name: 'IBM', headcount: 10000}];
+const Stocks = [
+   {id: 10001, name: 'HP', count: 1000, price:200},
+   {id: 10002, name: 'Oracle', count: 1000, price:200},
+   {id: 10003, name: 'TCS', count: 1000, price:200},
+   {id: 10004, name: 'HCL', count: 1000, price:200}
+]; 
+
+const MyCompnayComponent = HoCComponent(CompanyComponent, Companies);
+const MyStockComponent = HoCComponent(StockComponent, Stocks);
 
 
-// create a store with Simulator Compose
-const parameterEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// create a store using reducer, then confugure the Redux Simulator and
-// the SAGA middleware so that, all async operations will be monitored
-let store = createStore(
- reducer,
- parameterEnhancer(applyMiddleware(appSagaMiddleware))
-);
-
-// keep running the saga middleware 
-appSagaMiddleware.run(rootSaga);
-
-
- // the Provider will create a subscription of 'store'
- // for all components executing under it
+// the 'msg' will be used as a 'props' type
 ReactDOM.render(
-  <Provider store={store}>
-    <MainSagaComonent></MainSagaComonent>
-  </Provider>
-   ,
+  <React.StrictMode>
+    
+      <ColumnChart ></ColumnChart>
+      
+  
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

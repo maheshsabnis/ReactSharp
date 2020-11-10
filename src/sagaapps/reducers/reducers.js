@@ -14,7 +14,7 @@ const reducer=(state=[], action)=>{
                 // original state will be returned
                   return {...state, loading:false};
         case 'SAVE_PRODUCT_SUCCESS':
-                alert(`In Success Received Data ${JSON.stringify(action.products)}`);
+                alert(`In Success Received Data ${JSON.stringify(action.product)}`);
                 // the products data received from the AJAX call will be added in state
                   return {...state, product:action.product, loading:true};      
         default:

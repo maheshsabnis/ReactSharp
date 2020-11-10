@@ -8,7 +8,7 @@ class BarchartNewComponent extends Component {
         this.dataset = [100,200,300,400,500];
     }
     componentDidMount=()=>{
-        alert('ddd');
+        
         let size =  500;
         let svg = d3.select(this.myRef.current)
                     .append("svg")
@@ -23,7 +23,8 @@ class BarchartNewComponent extends Component {
            .attr("y", d=> size - d)
            .attr("width", react_width)
            .attr("height", d=> d)
-           .attr("fill", "teal")            
+           .attr("fill", "teal")     
+                 
 
     }
     render() { 

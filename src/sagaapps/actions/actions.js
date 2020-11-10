@@ -7,6 +7,13 @@ export const getProducts =()=> {
 };
 
 export const saveProduct=(product)=>{
+    alert('Save');
+    product = {
+        ProductId:'P1', ProductName: 'Prd1',
+        CategoryName: 'C1', Manufacturer:'M1',
+        Description: 'D1', BasePrice:12322
+    };
+    alert(`Savec ${JSON.stringify(product)}`);
     return {
         type: 'SAVE_PRODUCT',
         product

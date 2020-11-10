@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getProducts} from  './../actions/actions';
+import {getProducts, saveProduct} from  './../actions/actions';
  // to connect class component with redux store, traditionally 
  // we have the 'connect()' method. This is replaced by useSelector()
  import {connect} from 'react-redux';
@@ -11,7 +11,7 @@ class GetProductsRequestComponent extends Component {
     render() { 
         return (  
             <div className="container">
-                <button onClick={this.props.getProducts} className="btn btn-danger">GET PRODUCTS Data</button>
+                <button onClick={this.props.saveProduct} className="btn btn-danger">GET PRODUCTS Data</button>
             </div>
         );
     }
@@ -21,7 +21,8 @@ class GetProductsRequestComponent extends Component {
 // whihc is defined using props immutable objeci
 const mapDispatchToProps={
     // props: action to be dispatched, this is declared in actions.js in actions folder
-    getProducts: getProducts
+    getProducts: getProducts,
+    saveProduct: saveProduct
 };
 
 // connect the react component with redux, so that when an action is
